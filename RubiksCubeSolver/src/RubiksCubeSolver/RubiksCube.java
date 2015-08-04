@@ -248,4 +248,73 @@ public class RubiksCube {
 			this.aretes_aB();
 			this.cube[22] = "B";
 		}
+		
+		//Green :
+		
+		/**
+		 * movements of the corners of the green face
+		 */
+		private void coins_fG(){
+			this.cube[31] = this.cube[27]; 
+			this.cube[27] = this.cube[33];
+			this.cube[33] = this.cube[35];
+			this.cube[35] = this.cube[29];
+			this.cube[29] = this.cube[31];
+		}
+		
+		/**
+		 * movements of the segments of the green face	
+		 */
+		private void arretes_fG(){
+			this.cube[31] = this.cube[28]; 
+			this.cube[28] = this.cube[30];
+			this.cube[30] = this.cube[34];
+			this.cube[34] = this.cube[32];
+			this.cube[32] = this.cube[31];
+		}
+			
+		/**
+		 * movements of the first external corners of the green face
+		 */
+		private void coins_a1G(){
+			this.cube[31] = this.cube[17]; 
+			this.cube[17] = this.cube[8];
+			this.cube[8] = this.cube[44];
+			this.cube[44] = this.cube[53];
+			this.cube[53] = this.cube[31];
+		}
+		
+		/**
+		 * movements of the second external corners of the green face
+		 */
+		private void coins_a2G(){
+			this.cube[31] = this.cube[11]; 
+			this.cube[11] = this.cube[2];
+			this.cube[2] = this.cube[38];
+			this.cube[38] = this.cube[47];
+			this.cube[47] = this.cube[31];
+		}
+		
+		/**
+		 * movements of the external segments of the green face
+		 */
+		private void aretes_aG(){
+			this.cube[31] = this.cube[14]; 
+			this.cube[14] = this.cube[5];
+			this.cube[5] = this.cube[41];
+			this.cube[41] = this.cube[50];
+			this.cube[50] = this.cube[31];
+		}
+		
+		/**
+		 * the whole movements of the green face
+		 */
+		public void green(){
+			this.arretes_fG();
+			this.coins_fG();
+			this.coins_a1G();
+			this.coins_a2G();
+			this.aretes_aG();
+			this.cube[31] = "G";
+		}
 }
