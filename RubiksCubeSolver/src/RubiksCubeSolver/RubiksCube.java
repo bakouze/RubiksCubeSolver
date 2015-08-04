@@ -386,4 +386,73 @@ public class RubiksCube {
 		this.aretes_aO();
 		this.cube[40] = "O";
 	}
+
+	//Yellow :
+
+	/**
+	 * movements of the corners of the yellow face
+	 */
+	private void coins_fY(){
+		this.cube[49] = this.cube[45]; 
+		this.cube[45] = this.cube[51];
+		this.cube[51] = this.cube[53];
+		this.cube[53] = this.cube[47];
+		this.cube[47] = this.cube[49];
+	}
+
+	/**
+	 * movements of the segments of the yellow face	
+	 */
+	private void arretes_fY(){
+		this.cube[49] = this.cube[46]; 
+		this.cube[46] = this.cube[48];
+		this.cube[48] = this.cube[52];
+		this.cube[52] = this.cube[50];
+		this.cube[50] = this.cube[49];
+	}
+
+	/**
+	 * movements of the first external corners of the yellow face
+	 */
+	private void coins_a1Y(){
+		this.cube[49] = this.cube[42]; 
+		this.cube[42] = this.cube[18];
+		this.cube[18] = this.cube[11];
+		this.cube[11] = this.cube[35];
+		this.cube[35] = this.cube[49];
+	}
+
+	/**
+	 * movements of the second external corners of the yellow face
+	 */
+	private void coins_a2Y(){
+		this.cube[49] = this.cube[44]; 
+		this.cube[44] = this.cube[24];
+		this.cube[24] = this.cube[9];
+		this.cube[9] = this.cube[29];
+		this.cube[29] = this.cube[49];
+	}
+
+	/**
+	 * movements of the external segments of the yellow face
+	 */
+	private void aretes_aY(){
+		this.cube[49] = this.cube[43]; 
+		this.cube[43] = this.cube[21];
+		this.cube[21] = this.cube[10];
+		this.cube[10] = this.cube[32];
+		this.cube[32] = this.cube[49];
+	}
+
+	/**
+	 * the whole movements of the yellow face
+	 */
+	public void yellow(){
+		this.arretes_fY();
+		this.coins_fY();
+		this.coins_a1Y();
+		this.coins_a2Y();
+		this.aretes_aY();
+		this.cube[49] = "Y";
+	}
 }
