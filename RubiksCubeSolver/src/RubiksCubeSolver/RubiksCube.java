@@ -102,7 +102,7 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the white face
 	 */
-	public void white(){
+	private void white(){
 		this.arretes_fW();
 		this.coins_fW();
 		this.coins_a1W();
@@ -171,7 +171,7 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the red face
 	 */
-	public void red(){
+	private void red(){
 		this.arretes_fR();
 		this.coins_fR();
 		this.coins_a1R();
@@ -240,7 +240,7 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the blue face
 	 */
-	public void blue(){
+	private void blue(){
 		this.arretes_fB();
 		this.coins_fB();
 		this.coins_a1B();
@@ -309,7 +309,7 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the green face
 	 */
-	public void green(){
+	private void green(){
 		this.arretes_fG();
 		this.coins_fG();
 		this.coins_a1G();
@@ -378,7 +378,7 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the orange face
 	 */
-	public void orange(){
+	private void orange(){
 		this.arretes_fO();
 		this.coins_fO();
 		this.coins_a1O();
@@ -447,12 +447,39 @@ public class RubiksCube {
 	/**
 	 * the whole movements of the yellow face
 	 */
-	public void yellow(){
+	private void yellow(){
 		this.arretes_fY();
 		this.coins_fY();
 		this.coins_a1Y();
 		this.coins_a2Y();
 		this.aretes_aY();
 		this.cube[49] = "Y";
+	}
+
+	public void move(int nb, String color){
+		for(int i=0;i<nb;i++){
+			switch(color){
+			case "W":
+				this.white();
+				break;
+			case "R":
+				this.red();
+				break;
+			case "B":
+				this.blue();
+				break;
+			case "G":
+				this.green();
+				break;
+			case "O":
+				this.orange();
+				break;
+			case "Y":
+				this.yellow();
+				break;
+			default:
+				System.out.println("Corrupted Data");
+			}
+		}
 	}
 }
