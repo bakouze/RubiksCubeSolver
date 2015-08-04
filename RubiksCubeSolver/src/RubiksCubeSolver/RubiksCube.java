@@ -12,6 +12,11 @@ public class RubiksCube {
 	 * The table containing the value of the colors on the faces of the cube
 	 */
 	private String[] cube;
+	
+	/**
+	 * The list of the moves to solve the cube
+	 */
+	private Solution solution;
 
 	/**
 	 * Constructor :
@@ -461,21 +466,27 @@ public class RubiksCube {
 			switch(color){
 			case "W":
 				this.white();
+				this.solution.addW();
 				break;
 			case "R":
 				this.red();
+				this.solution.addR();
 				break;
 			case "B":
 				this.blue();
+				this.solution.addB();
 				break;
 			case "G":
 				this.green();
+				this.solution.addG();
 				break;
 			case "O":
 				this.orange();
+				this.solution.addO();
 				break;
 			case "Y":
 				this.yellow();
+				this.solution.addY();
 				break;
 			default:
 				System.out.println("Corrupted Data");
