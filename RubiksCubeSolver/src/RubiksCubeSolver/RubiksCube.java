@@ -40,9 +40,14 @@ public class RubiksCube {
 	 */
 	public RubiksCube(String[] c){
 		if(c.length == 54){
-			for(int i =0;i<54;i++){
-				this.cube[i] = c[i];
+			String[] tab = new String[c.length];
+			for(int i=0; i<c.length;i++){
+				tab[i] = c[i];
 			}
+			this.cube = tab;
+		}
+		else{
+			System.out.println("Wrong input table size : " + c.length);
 		}
 		this.solution = new Solution();
 	}
@@ -510,5 +515,42 @@ public class RubiksCube {
 			s += cube[i] + ", ";
 		}
 		return s;
+	}
+	
+	/**
+	 * Method 
+	 * @return the table of double pieces
+	 */
+	public Doublet[] doubleTab(){
+		Doublet[] tab = new Doublet[12];
+		tab[0] = new Doublet(this.cube[1],this.cube[16]);
+		tab[1] = new Doublet(this.cube[3],this.cube[23]);
+		tab[2] = new Doublet(this.cube[5],this.cube[30]); 
+		tab[3] = new Doublet(this.cube[7],this.cube[37]);
+		tab[4] = new Doublet(this.cube[12],this.cube[19]);
+		tab[5] = new Doublet(this.cube[14],this.cube[28]);
+		tab[6] = new Doublet(this.cube[10],this.cube[52]);
+		tab[7] = new Doublet(this.cube[25],this.cube[39]);
+		tab[8] = new Doublet(this.cube[21],this.cube[48]);
+		tab[9] = new Doublet(this.cube[34],this.cube[41]);
+		tab[10] = new Doublet(this.cube[32],this.cube[50]);
+		tab[11] = new Doublet(this.cube[43],this.cube[46]);
+		return tab;		
+	}
+	
+	/**
+	 * Method which scan the doubleTab for the doublet (a,b)
+	 * @param a
+	 * @param b
+	 * @return the position of (a,b)
+	 */
+	public int scanDouble(String a, String b){
+		int position = 0;
+		Doublet d = new Doublet(a,b);
+		Doublet[] dTab = this.doubleTab();
+		while(dTab[position].compare(d)){
+			position++;
+		}
+		return position;
 	}
 }

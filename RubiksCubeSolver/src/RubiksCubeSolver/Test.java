@@ -15,5 +15,4 @@ public class Test {
 		cube.move(4, "Y");
 		System.out.println(cube.toString());
 	}
-
 }
