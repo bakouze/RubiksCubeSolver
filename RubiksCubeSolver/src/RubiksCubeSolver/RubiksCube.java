@@ -32,6 +32,7 @@ public class RubiksCube {
 				"Y","Y","Y","Y","Y","Y","Y","Y","Y",
 		};
 		this.cube = c;
+		this.solution = new Solution();
 	}
 
 	/**
@@ -43,6 +44,7 @@ public class RubiksCube {
 				this.cube[i] = c[i];
 			}
 		}
+		this.solution = new Solution();
 	}
 
 	//definition of the movements :
@@ -461,6 +463,11 @@ public class RubiksCube {
 		this.cube[49] = "Y";
 	}
 
+	/**
+	 * Turn the face "color" of the cube nb times clockwise.
+	 * @param nb
+	 * @param color
+	 */
 	public void move(int nb, String color){
 		for(int i=0;i<nb;i++){
 			switch(color){
@@ -492,5 +499,16 @@ public class RubiksCube {
 				System.out.println("Corrupted Data");
 			}
 		}
+	}
+	
+	/**
+	 * Return a String showing the current configuration of the cube
+	 */
+	public String toString(){
+		String s = new String();
+		for(int i=0; i<this.cube.length;i++){
+			s += cube[i] + ", ";
+		}
+		return s;
 	}
 }
