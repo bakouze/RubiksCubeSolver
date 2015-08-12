@@ -12,11 +12,6 @@ public class RubiksCube {
 	 * The table containing the value of the colors on the faces of the cube
 	 */
 	private String[] cube;
-	
-	/**
-	 * The list of the moves to solve the cube
-	 */
-	private Solution solution;
 
 	/**
 	 * Constructor :
@@ -32,7 +27,6 @@ public class RubiksCube {
 				"Y","Y","Y","Y","Y","Y","Y","Y","Y",
 		};
 		this.cube = c;
-		this.solution = new Solution();
 	}
 
 	/**
@@ -49,7 +43,6 @@ public class RubiksCube {
 		else{
 			System.out.println("Wrong input table size : " + c.length);
 		}
-		this.solution = new Solution();
 	}
 
 	//definition of the movements :
@@ -473,32 +466,32 @@ public class RubiksCube {
 	 * @param nb
 	 * @param color
 	 */
-	public void move(int nb, String color){
+	public void move(int nb, String color, Solution solution){
 		for(int i=0;i<nb;i++){
 			switch(color){
 			case "W":
 				this.white();
-				this.solution.addW();
+				solution.addW();
 				break;
 			case "R":
 				this.red();
-				this.solution.addR();
+				solution.addR();
 				break;
 			case "B":
 				this.blue();
-				this.solution.addB();
+				solution.addB();
 				break;
 			case "G":
 				this.green();
-				this.solution.addG();
+				solution.addG();
 				break;
 			case "O":
 				this.orange();
-				this.solution.addO();
+				solution.addO();
 				break;
 			case "Y":
 				this.yellow();
-				this.solution.addY();
+				solution.addY();
 				break;
 			default:
 				System.out.println("Corrupted Data");
@@ -507,7 +500,7 @@ public class RubiksCube {
 	}
 	
 	/**
-	 * Return a String showing the current configuration of the cube
+	 * @return a String showing the current configuration of the cube
 	 */
 	public String toString(){
 		String s = new String();
@@ -521,7 +514,7 @@ public class RubiksCube {
 	 * Method 
 	 * @return the table of double pieces
 	 */
-	public Doublet[] doubleTab(){
+	private Doublet[] doubleTab(){
 		Doublet[] tab = new Doublet[12];
 		tab[0] = new Doublet(this.cube[1],this.cube[16]);
 		tab[1] = new Doublet(this.cube[3],this.cube[23]);
@@ -549,6 +542,40 @@ public class RubiksCube {
 		Doublet d = new Doublet(a,b);
 		Doublet[] dTab = this.doubleTab();
 		while(dTab[position].compare(d)){
+			position++;
+		}
+		return position;
+	}
+	
+	/**
+	 * Method
+	 * @return the table of triple pieces
+	 */
+	private Triplet[] tripletTab(){
+		Triplet[] tab = new Triplet[8];
+		tab[0] = new Triplet(this.cube[0],this.cube[15],this.cube[20]);
+		tab[1] = new Triplet(this.cube[2],this.cube[17],this.cube[27]);
+		tab[2] = new Triplet(this.cube[6],this.cube[26],this.cube[36]); 
+		tab[3] = new Triplet(this.cube[8],this.cube[33],this.cube[38]);
+		tab[4] = new Triplet(this.cube[9],this.cube[18],this.cube[51]);
+		tab[5] = new Triplet(this.cube[11],this.cube[29],this.cube[53]);
+		tab[6] = new Triplet(this.cube[24],this.cube[42],this.cube[45]);
+		tab[7] = new Triplet(this.cube[35],this.cube[44],this.cube[47]);
+		return tab;
+	}
+	
+	/**
+	 * Method which scan the tripleTab for the triplet (a,b,c)
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return the position of (a,b,c)
+	 */
+	public int scanTriple(String a, String b, String c){
+		int position = 0;
+		Triplet t = new Triplet(a,b,c);
+		Triplet[] tTab = this.tripletTab();
+		while(tTab[position].compare(t)){
 			position++;
 		}
 		return position;

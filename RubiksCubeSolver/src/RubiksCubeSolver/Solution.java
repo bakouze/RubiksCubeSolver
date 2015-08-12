@@ -1,5 +1,6 @@
 package RubiksCubeSolver;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -62,5 +63,15 @@ public class Solution {
 	 */
 	public void addY(){
 		this.solution.add("Y");
+	}
+	
+	public String toString(){
+		Iterator<String> iter = this.solution.iterator();
+		String s = new String();
+		while(iter.hasNext()){
+			String temp = iter.next();
+			s+=temp + "; ";
+		}
+		return s;
 	}
 }
