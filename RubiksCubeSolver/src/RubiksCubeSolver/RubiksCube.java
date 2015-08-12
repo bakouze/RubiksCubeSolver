@@ -12,11 +12,6 @@ public class RubiksCube {
 	 * The table containing the value of the colors on the faces of the cube
 	 */
 	private String[] cube;
-	
-	/**
-	 * The list of the moves to solve the cube
-	 */
-	private Solution solution;
 
 	/**
 	 * Constructor :
@@ -32,7 +27,6 @@ public class RubiksCube {
 				"Y","Y","Y","Y","Y","Y","Y","Y","Y",
 		};
 		this.cube = c;
-		this.solution = new Solution();
 	}
 
 	/**
@@ -49,7 +43,6 @@ public class RubiksCube {
 		else{
 			System.out.println("Wrong input table size : " + c.length);
 		}
-		this.solution = new Solution();
 	}
 
 	//definition of the movements :
@@ -473,32 +466,32 @@ public class RubiksCube {
 	 * @param nb
 	 * @param color
 	 */
-	public void move(int nb, String color){
+	public void move(int nb, String color, Solution solution){
 		for(int i=0;i<nb;i++){
 			switch(color){
 			case "W":
 				this.white();
-				this.solution.addW();
+				solution.addW();
 				break;
 			case "R":
 				this.red();
-				this.solution.addR();
+				solution.addR();
 				break;
 			case "B":
 				this.blue();
-				this.solution.addB();
+				solution.addB();
 				break;
 			case "G":
 				this.green();
-				this.solution.addG();
+				solution.addG();
 				break;
 			case "O":
 				this.orange();
-				this.solution.addO();
+				solution.addO();
 				break;
 			case "Y":
 				this.yellow();
-				this.solution.addY();
+				solution.addY();
 				break;
 			default:
 				System.out.println("Corrupted Data");
