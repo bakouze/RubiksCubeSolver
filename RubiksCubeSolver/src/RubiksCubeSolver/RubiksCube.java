@@ -44,6 +44,15 @@ public class RubiksCube {
 			System.out.println("Wrong input table size : " + c.length);
 		}
 	}
+	
+	/**
+	 * Accessor
+	 * @param nb
+	 * @return the String in case nb
+	 */
+	public String getElement(int nb){
+		return this.cube[nb];
+	}
 
 	//definition of the movements :
 
@@ -541,7 +550,7 @@ public class RubiksCube {
 		int position = 0;
 		Doublet d = new Doublet(a,b);
 		Doublet[] dTab = this.doubleTab();
-		while(dTab[position].compare(d)){
+		while(!dTab[position].isEqual(d)){
 			position++;
 		}
 		return position;
@@ -575,7 +584,7 @@ public class RubiksCube {
 		int position = 0;
 		Triplet t = new Triplet(a,b,c);
 		Triplet[] tTab = this.tripletTab();
-		while(tTab[position].compare(t)){
+		while(!tTab[position].isEqual(t)){
 			position++;
 		}
 		return position;
