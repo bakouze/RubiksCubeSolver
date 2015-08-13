@@ -299,4 +299,129 @@ public class Resolution {
 		this.step1Orange();
 		this.step1Replace();
 	}
+	
+	//Step 2 : the whole white face
+	
+	/**
+	 * the key move for the corner positioning
+	 * @param a
+	 * @param b
+	 */
+	private void cornerPositionAux(String a,String b){
+		this.move(3, a);
+		this.move(3, b);
+		this.move(1, a);
+		this.move(1, b);
+	}
+	
+	/**
+	 * Method to represent the move we will use in this step.
+	 * @param a
+	 */
+	private void cornerPositionW(String a){
+		this.cornerPositionAux(a, "Y");
+	}
+	
+	/**
+	 * Method used to exit a corner
+	 * @param a
+	 * @param b
+	 */
+	private void cornerExit(String a, String b){
+		this.move(3, a);
+		this.move(1, b);
+		this.move(1, a);
+	}
+	
+	/**
+	 * Method to exit corner nb
+	 * @param nb
+	 */
+	private void cornerExitNb(int nb){
+		switch(nb){
+		case 0:
+			this.cornerExit("B", "Y");
+			break;
+		case 1:
+			this.cornerExit("R", "Y");
+			break;
+		case 2:
+			this.cornerExit("O", "Y");
+			break;
+		case 3:
+			this.cornerExit("G", "Y");
+			break;
+		default:
+			System.out.println("Error cornerExit Step2");
+		}
+	}
+	
+	/**
+	 * Method to place a corner knowing the property : "6*sixTime = Id".
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param place
+	 * @param nb
+	 */
+	private void sixTime(String a, String b, String c, int place, int nb){
+		int temp = 0;
+		Triplet[] tTab = this.cube.tripletTab();
+		Triplet t = new Triplet(a,b,c);
+		if(nb==0){
+			while((!tTab[place].isStrictlyEqual(t)) && (temp<6)){
+				this.cornerPositionW(c);
+				temp++;
+				tTab = this.cube.tripletTab();
+			}
+		}
+		else{
+			while((!tTab[place].isStrictlyEqual(t))&&(temp<6)){
+				this.cornerPositionW(b);
+				temp++;
+				tTab = this.cube.tripletTab();
+			}
+		}
+	}
+	
+	/**
+	 * method using sixTime to actually place the corner we want to place
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param place
+	 * @param nb
+	 */
+	private void cornerPlacing(String a, String b, String c, int place, int nb){
+		Triplet[] tTab = this.cube.tripletTab();
+		Triplet t = new Triplet(a,b,c);
+		int test = 0;
+		while(!tTab[place].isEqual(t) && test<50){
+			test++;
+			if(test==50){
+				System.out.println("Error infinite cycle");
+			}
+			int position = this.cube.scanTriple(a, b, c);
+			if((position == place) || (position == place +4)){
+				this.sixTime(a, b, c, place, nb);
+			}
+			else if(position<4){
+				this.cornerExitNb(position);
+			}
+			else{
+				this.move(1, "Y");
+			}
+			tTab = this.cube.tripletTab();
+		}
+	}
+	
+	/**
+	 * Method which solves step 2.
+	 */
+	public void step2(){
+		this.cornerPlacing("W", "R", "B", 0, 0);
+		this.cornerPlacing("W", "R", "G", 1, 1);
+		this.cornerPlacing("W", "B", "O", 2, 0);
+		this.cornerPlacing("W", "G", "O", 3, 1);
+	}
 }

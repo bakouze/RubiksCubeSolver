@@ -10,7 +10,7 @@ public class Test {
 				"G", "B", "G", "B", "G", "G", "G", "W", "R", 
 				"O", "G", "O", "R", "O", "G", "W", "R", "Y", 
 				"R", "W", "B", "O", "Y", "Y", "B", "G", "Y"};
-		testStep1(cube);
+		testStep2(cube);
 	}
 	
 	/**
@@ -33,6 +33,14 @@ public class Test {
 		Resolution reso = new Resolution(cube);
 		System.out.println(reso.toString());
 		reso.step1();
+		System.out.println(reso.toString());
+	}
+	
+	public static void testStep2(String[] cube){
+		Resolution reso = new Resolution(cube);
+		System.out.println(reso.toString());
+		reso.step1();
+		reso.step2();
 		System.out.println(reso.toString());
 	}
 }

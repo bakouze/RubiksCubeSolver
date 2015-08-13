@@ -560,7 +560,7 @@ public class RubiksCube {
 	 * Method
 	 * @return the table of triple pieces
 	 */
-	private Triplet[] tripletTab(){
+	public Triplet[] tripletTab(){
 		Triplet[] tab = new Triplet[8];
 		tab[0] = new Triplet(this.cube[0],this.cube[15],this.cube[20]);
 		tab[1] = new Triplet(this.cube[2],this.cube[17],this.cube[27]);
