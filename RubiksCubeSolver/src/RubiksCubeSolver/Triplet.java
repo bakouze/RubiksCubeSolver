@@ -59,9 +59,21 @@ public class Triplet {
 	 * @param t, a triplet
 	 * @return true if equals, false else.
 	 */
-	public boolean compare(Triplet t){
+	public boolean isEqual(Triplet t){
 		return ((t.getFirst().equals(this.first)) && (t.getSecond().equals(this.second)) && (t.getThird().equals(this.third))) || 
+				((t.getFirst().equals(this.first)) && (t.getSecond().equals(this.third)) && (t.getThird().equals(this.second))) ||
 				((t.getFirst().equals(this.second)) && (t.getSecond().equals(this.third)) && (t.getThird().equals(this.first))) ||
-				((t.getFirst().equals(this.third)) && (t.getSecond().equals(this.first)) && (t.getThird().equals(this.second)));
+				((t.getFirst().equals(this.second)) && (t.getSecond().equals(this.first)) && (t.getThird().equals(this.third))) ||
+				((t.getFirst().equals(this.third)) && (t.getSecond().equals(this.first)) && (t.getThird().equals(this.second))) ||
+				((t.getFirst().equals(this.third)) && (t.getSecond().equals(this.second)) && (t.getThird().equals(this.first)));
+	}
+	
+	/**
+	 * Compare 2 triplets strictly
+	 * @param t
+	 * @return
+	 */
+	public boolean isStrictlyEqual(Triplet t){
+		return ((t.getFirst().equals(this.first)) && (t.getSecond().equals(this.second)) && (t.getThird().equals(this.third)));
 	}
 }

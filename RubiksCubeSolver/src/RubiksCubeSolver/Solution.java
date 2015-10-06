@@ -65,6 +65,10 @@ public class Solution {
 		this.solution.add("Y");
 	}
 	
+	/**
+	 * Method
+	 * @return the string of the list solution
+	 */
 	public String toString(){
 		Iterator<String> iter = this.solution.iterator();
 		String s = new String();

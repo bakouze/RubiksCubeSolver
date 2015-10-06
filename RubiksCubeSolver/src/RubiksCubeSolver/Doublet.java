@@ -46,7 +46,7 @@ public class Doublet {
 	 * @param d, a doublet
 	 * @return true if equals, false else.
 	 */
-	public boolean compare(Doublet d){
+	public boolean isEqual(Doublet d){
 		return ((d.getFirst().equals(this.first)) && (d.getSecond().equals(this.second))) || ((d.getFirst().equals(this.second)) && (d.getSecond().equals(this.first)));
 	}
 }
