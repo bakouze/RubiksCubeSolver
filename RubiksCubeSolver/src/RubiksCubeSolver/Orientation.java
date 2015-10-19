@@ -67,6 +67,9 @@ public class Orientation {
 	public Orientation(String a, String b){
 		int value = value(a) - value(b);
 		value = value%4;
+		if(value<0){
+			value += 4;
+		}
 		switch(value){
 		case 0:
 			System.out.println("Error 0 in Step 3 : setOrientation");
@@ -81,7 +84,7 @@ public class Orientation {
 			this.orientationDroite = true;
 			break;
 		default:
-			System.out.println("Error modulo in Step 3 : setOrientation");
+			System.out.println("Error modulo in Step 3 : setOrientation. " + value);
 		}
 	}
 }
