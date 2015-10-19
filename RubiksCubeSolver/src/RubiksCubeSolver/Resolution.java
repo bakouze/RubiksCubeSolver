@@ -424,4 +424,207 @@ public class Resolution {
 		this.cornerPlacing("W", "B", "O", 2, 0);
 		this.cornerPlacing("W", "G", "O", 3, 1);
 	}
+	
+	//Step 3 : Second crown.
+	
+		/**
+		 * The manchot macro, a classic move which allows the solve of step 3
+		 * @param a
+		 * @param b
+		 */
+		private void manchot(String a, String b){
+			String c = "Y";
+			Orientation ori = new Orientation(a,b);
+			if(!ori.getOrientation()){
+				this.move(1, c);
+				this.move(1, b);
+				this.move(3, c);
+				this.move(3, b);
+				this.move(3, c);
+				this.move(3, a);
+				this.move(1, c);
+				this.move(1, a);
+			}
+			else{
+				this.move(3, c);
+				this.move(3, b);
+				this.move(1, c);
+				this.move(1, b);
+				this.move(1, c);
+				this.move(1, a);
+				this.move(3, c);
+				this.move(3, a);
+			}
+		}
+		
+		/**
+		 * a maccro which give the position of the center
+		 * @return i the position of the center
+		 */
+		private int searchCenter(){
+			int i = 0;
+			while(i<=3){
+				Doublet[] tab = this.cube.doubleTabExtraction();
+				if(tab[i].getFirst()=="Y"||tab[i].getSecond()=="Y"){
+					i++;
+				}
+				else if(i==0&&tab[i].getFirst()=="R"&&tab[i].getSecond()=="B"){
+					i++;
+				}
+				else if(i==0){
+					i=4;
+				}
+				else if(i==1&&tab[i].getFirst()=="R"&&tab[i].getSecond()=="G"){
+					i++;
+				}
+				else if(i==1){
+					i=5;
+				}
+				else if(i==2&&tab[i].getFirst()=="B"&&tab[i].getSecond()=="O"){
+					i++;
+				}
+				else if(i==2){
+					i=7;
+				}
+				else if(i==3&&tab[i].getFirst()=="G"&&tab[i].getSecond()=="O"){
+					i++;
+				}
+				else if(i==3){
+					i=9;
+				}
+				else{
+					System.out.println("error step 3 : searchCenter");
+				}
+			}
+			return i;
+		}
+		
+		/**
+		 * function which exit a center if missplaced
+		 * @param n
+		 */
+		private void exitCenter(int n){
+			switch(n){
+			case 4:
+				this.manchot("R", "B");
+				break;
+			case 5:
+				this.manchot("R", "G");
+				break;
+			case 7:
+				this.manchot("B", "O");
+				break;
+			case 9:
+				this.manchot("G", "O");
+				break;
+			default: 
+				System.out.println("Error step 3 : exitCenter. " + n);
+			}
+		}
+		
+		/**
+		 * the orange boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean orange(){
+			return this.cube.getElement(43)=="O"&&this.cube.getElement(46)!="Y";
+		}
+		
+		/**
+		 * the blue boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean blue(){
+			return this.cube.getElement(21)=="B"&&this.cube.getElement(48)!="Y";
+		}
+		
+		/**
+		 * the green boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean green(){
+			return this.cube.getElement(32)=="G"&&this.cube.getElement(50)!="Y";
+		}
+		
+		/**
+		 * the red boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean red(){
+			return this.cube.getElement(10)=="R"&&this.cube.getElement(52)!="Y";
+		}
+		
+		/**
+		 * function which rotate the yellow crown if all pieces are missplaced
+		 */
+		private void yellowRotation(){
+			int nbMove = 0;
+			while(!this.red()&&!this.green()&&!this.blue()&&this.orange()&&nbMove<=3){
+				this.move(1, "Y");
+				nbMove++;
+			}
+		}
+		
+		/**
+		 * function using the manchot function to solve step 3
+		 */
+		private void placeManchot(){
+			if(this.red()){
+				this.manchot(this.cube.getElement(10), this.cube.getElement(52));
+			}
+			else if(this.green()){
+				this.manchot(this.cube.getElement(32), this.cube.getElement(50));
+			}
+			else if(this.blue()){
+				this.manchot(this.cube.getElement(21), this.cube.getElement(48));
+			}
+			else if(this.orange()){
+				this.manchot(this.cube.getElement(43), this.cube.getElement(46));
+			}
+			else{
+				this.exitCenter(this.searchCenter());
+			}
+		}
+		
+		/**
+		 * the rg boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean rg(){
+			return this.cube.getElement(14)=="R"&&this.cube.getElement(28)=="G";
+		}
+		
+		/**
+		 * the go boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean go(){
+			return this.cube.getElement(34)=="G"&&this.cube.getElement(41)=="O";
+		}
+		
+		/**
+		 * the ob boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean ob(){
+			return this.cube.getElement(39)=="O"&&this.cube.getElement(25)=="B";
+		}
+		
+		/**
+		 * the br boolean used in next functions
+		 * @return boolean
+		 */
+		private boolean br(){
+			return this.cube.getElement(19)=="B"&&this.cube.getElement(12)=="R";
+		}
+		
+		/**
+		 * function which solves step 3
+		 */
+		public void step3(){
+			while(!(this.rg()&&this.go()&&this.ob()&&this.br())){
+				this.yellowRotation();
+				this.placeManchot();
+			}
+		}
 }
