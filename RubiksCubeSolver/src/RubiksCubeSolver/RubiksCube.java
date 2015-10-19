@@ -557,6 +557,20 @@ public class RubiksCube {
 	}
 	
 	/**
+	 * Method which create a new table extracted from doubleTab, used in step 3
+	 * @return a table of doublets
+	 */
+	public Doublet[] doubleTabExtraction(){
+		Doublet[] tab = doubleTab();
+		Doublet[] tab2 = new Doublet[4];
+		tab2[0] = tab[4];
+		tab2[1] = tab[5];
+		tab2[2] = tab[7];
+		tab2[3] = tab[9];
+		return tab2;
+	}
+	
+	/**
 	 * Method
 	 * @return the table of triple pieces
 	 */
