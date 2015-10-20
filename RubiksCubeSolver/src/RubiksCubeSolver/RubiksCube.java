@@ -602,5 +602,5 @@ public class RubiksCube {
 			position++;
 		}
 		return position;
-	}
+	}	
 }
